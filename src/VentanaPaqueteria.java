@@ -91,25 +91,31 @@ public class VentanaPaqueteria {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == buscarButton) {
 
-                    if (buscarPesoField.getText().equals("")) {
-                        //Solo lo del aumento le incluyo lo del error para que se vea bien la ventana de Error
-                        JOptionPane.showMessageDialog(null, "Por favor ingrese el peso", "Error", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        //Pareseo el paramtro recuperado a double tomandolo de una vez de la casilla
-                        double peso = Double.parseDouble(buscarPesoField.getText());
-                        //Uso la funcion y la almcaeno en un dato tipo Paquteria
-                        List<Paqueteria> resultado = lista.buscarPeso(lista.getListaPaquete(), peso);
+                    try {
 
-                        if (resultado == null) {
-                            //si no cumple imprime lo siguiente
-                            buscarPesoArea.setText("No se encontró ningún paquete con ese peso");
+                        if (buscarPesoField.getText().equals("")) {
+                            //Solo lo del aumento le incluyo lo del error para que se vea bien la ventana de Error
+                            JOptionPane.showMessageDialog(null, "Por favor ingrese el peso", "Error", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            //Imprime en el text area los datos del resultado
-                            buscarPesoArea.setText(resultado.toString());
-                        }
+                            //Pareseo el paramtro recuperado a double tomandolo de una vez de la casilla
+                            double peso = Double.parseDouble(buscarPesoField.getText());
+                            //Uso la funcion y la almcaeno en un dato tipo Paquteria
 
-                        //Limpia el unico paramtro que pide al usuario
-                        buscarPesoField.setText("");
+                            List<Paqueteria> resultado = lista.buscarPeso(lista.getListaPaquete(), peso);
+
+                            if (resultado == null) {
+                                //si no cumple imprime lo siguiente
+                                buscarPesoArea.setText("No se encontró ningún paquete con ese peso");
+                            } else {
+                                //Imprime en el text area los datos del resultado
+                                buscarPesoArea.setText(resultado.toString());
+                            }
+
+                            //Limpia el unico paramtro que pide al usuario
+                            buscarPesoField.setText("");
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "No puede ingresar caracteres", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -159,7 +165,7 @@ public class VentanaPaqueteria {
                     } else {
                         //Se toma los datos y se hace el respectivo parseo
                         double resultado = lista.pesoPaqCiudad(lista.getListaPaquete(), ciudad);
-                        ciudadArea.setText("El peso total de paquetes que hay en la ciudad" + ciudad + " es de " + String.valueOf(resultado));
+                        ciudadArea.setText("El peso total de paquetes que hay en la ciudad " + ciudad + " es de " + String.valueOf(resultado));
                     }
                 }
             }

@@ -25,6 +25,10 @@ public class Lista {
     public List<Paqueteria> buscarPeso(List<Paqueteria> lista, double pesoBuscado) {
 
         List<Paqueteria> resultado = new ArrayList<>();
+
+        if(lista.isEmpty()){
+            return null;
+        }
         //uso size para tomar el tamaño de la lista
         //esto seria un intervalo
         int left = 0; //desde 0
@@ -39,20 +43,36 @@ public class Lista {
             Paqueteria p = lista.get(mid);
 
             //se cumple y solo retorna la lista
+            //buscamos por cada lado por si se repite algun dato
             if (p.getPeso() == pesoBuscado) {
                 resultado.add(p);
+
+                int i = mid - 1;
+                while (i >= 0 && lista.get(i).getPeso() == pesoBuscado) {
+                    resultado.add(lista.get(i));
+                    i--;
+                }
+
+                int j = mid + 1;
+                while (j < lista.size() && lista.get(j).getPeso() == pesoBuscado) {
+                    resultado.add(lista.get(j));
+                    j++;
+                }
+
+                return resultado;
             }
 
             //sino se cumple segun la condicion se actualiza el intervalo
             //se hace mas pequeño el intervalo
             if (p.getPeso() < pesoBuscado) {
-                left = mid + 1;
+                left = mid + 1;//desde la izquierda
             } else {
-                right = mid - 1;
+                right = mid - 1;//desde la derecha
             }
         }
 
         return resultado;
+
     }
 
 
