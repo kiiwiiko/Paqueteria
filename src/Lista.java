@@ -47,12 +47,14 @@ public class Lista {
             if (p.getPeso() == pesoBuscado) {
                 resultado.add(p);
 
+                //de derecha
                 int i = mid - 1;
                 while (i >= 0 && lista.get(i).getPeso() == pesoBuscado) {
                     resultado.add(lista.get(i));
                     i--;
                 }
 
+                //a izquierda
                 int j = mid + 1;
                 while (j < lista.size() && lista.get(j).getPeso() == pesoBuscado) {
                     resultado.add(lista.get(j));
