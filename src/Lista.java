@@ -22,8 +22,9 @@ public class Lista {
 
     //Busqueda binaria
     //Use directamente la funcion que nos da el aula virtual, porq el metodo que ya esta en java usa arrglo como parametro
-    public Paqueteria buscarPeso(List<Paqueteria> lista, double pesoBuscado) {
+    public List<Paqueteria> buscarPeso(List<Paqueteria> lista, double pesoBuscado) {
 
+        List<Paqueteria> resultado = new ArrayList<>();
         //uso size para tomar el tamaño de la lista
         //esto seria un intervalo
         int left = 0; //desde 0
@@ -39,7 +40,7 @@ public class Lista {
 
             //se cumple y solo retorna la lista
             if (p.getPeso() == pesoBuscado) {
-                return p;
+                resultado.add(p);
             }
 
             //sino se cumple segun la condicion se actualiza el intervalo
@@ -51,7 +52,7 @@ public class Lista {
             }
         }
 
-        return null;
+        return resultado;
     }
 
 
@@ -82,8 +83,8 @@ public class Lista {
 
     //Busqueda lineal o secuancial
     //Usamos solo la lista como parametro lo indico la profe
-    public Paqueteria busquedaSecuencialCiudades(List<Paqueteria> lista, String ciudadRecepcion, String ciudadEntrega) {
-
+    public List<Paqueteria> busquedaSecuencialCiudades(List<Paqueteria> lista, String ciudadRecepcion, String ciudadEntrega) {
+        List<Paqueteria> resultado = new ArrayList<>();
         for (int i = 0; i < lista.size(); i++) {
             //Segun la iteracion tomamos el objeto en un dato tipo Paqueteria
             Paqueteria p = lista.get(i);
@@ -91,12 +92,12 @@ public class Lista {
             //condicion if que compara el parametro recepcion ingresado y el que ya estaba en la lista
             if (p.getCiduadRecepcion().equalsIgnoreCase(ciudadRecepcion) && p.getCiudadEntrega().equalsIgnoreCase(ciudadEntrega)) {
                 //retornamos el objeto encontrado de la lista
-                return p;
+                resultado.add(p);
             }
         }
 
         //Datos no encontrados
-        return null;
+        return resultado;
     }
 
     //Busqueda en secuencia solo con el for

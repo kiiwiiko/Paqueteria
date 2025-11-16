@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class VentanaPaqueteria {
     private JPanel ventana;
@@ -97,7 +98,7 @@ public class VentanaPaqueteria {
                         //Pareseo el paramtro recuperado a double tomandolo de una vez de la casilla
                         double peso = Double.parseDouble(buscarPesoField.getText());
                         //Uso la funcion y la almcaeno en un dato tipo Paquteria
-                        Paqueteria resultado = lista.buscarPeso(lista.getListaPaquete(), peso);
+                        List<Paqueteria> resultado = lista.buscarPeso(lista.getListaPaquete(), peso);
 
                         if (resultado == null) {
                             //si no cumple imprime lo siguiente
@@ -129,7 +130,7 @@ public class VentanaPaqueteria {
                     if (ciudadRecepcion.equals(ciudadEntrega)) {
                         JOptionPane.showMessageDialog(null, "Porfavor selecionar un destino diferente al de entrega", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        Paqueteria resultado = lista.busquedaSecuencialCiudades(lista.getListaPaquete(), ciudadRecepcion, ciudadEntrega);
+                        List<Paqueteria> resultado = lista.busquedaSecuencialCiudades(lista.getListaPaquete(), ciudadRecepcion, ciudadEntrega);
                         if (resultado == null) {
                             //Si no se comple me devuelve el siguiente texto
                             secuencialArea.setText("No se encontraron paquetes con esas ciudades.");
